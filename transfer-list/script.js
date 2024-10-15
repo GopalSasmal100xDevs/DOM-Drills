@@ -36,7 +36,6 @@ function moveItemsRight() {
 }
 
 function uncheckItem(itemId, list) {
-  console.log(itemId, list);
   list.forEach(({ id, checked }, index, arr) => {
     if (itemId === id) {
       arr[index]["checked"] = !checked;
