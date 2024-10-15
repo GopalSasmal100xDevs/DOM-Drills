@@ -50,13 +50,13 @@
         gap: 20px;
         flex-direction: column;
       }
-      .settings i {
+      .settings button {
+        /* all: unset; */
         width: 50px;
         height: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: 1px 4px 6px 1px #ccc;
         cursor: pointer;
         border-radius: 5px;
       }
@@ -68,6 +68,9 @@
         gap: 20px;
         flex-direction: row;
       }
+      button:disabled {
+        cursor: not-allowed;
+      }
     </style>
   </head>
   <body>
@@ -78,18 +81,18 @@
     <div class="container">
       <div class="box" id="first-box"></div>
       <div class="settings">
-        <i
-          class="fa fa-angle-double-left"
-          aria-hidden="true"
-          id="all-left-btn"
-        ></i>
-        <i class="fa fa-angle-left" aria-hidden="true" id="left-btn"></i>
-        <i class="fa fa-angle-right" aria-hidden="true" id="right-btn"></i>
-        <i
-          class="fa fa-angle-double-right"
-          aria-hidden="true"
-          id="all-right-btn"
-        ></i>
+        <button id="all-left-btn">
+          <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+        </button>
+        <button id="left-btn">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+        </button>
+        <button id="right-btn">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
+        <button id="all-right-btn">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </button>
       </div>
       <div class="box" id="second-box"></div>
     </div>
