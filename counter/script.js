@@ -14,3 +14,8 @@ decrementBtn.addEventListener("click", () => {
   }
   count.innerText = parseInt(count.innerText || 0) - parseInt(input.value || 0);
 });
+
+const resetBtn = document.querySelector("#reset-btn");
+resetBtn.addEventListener("click", () => {
+  count.innerText = 0;
+});
