@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Transfer List - DOM Drills</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .transfer-list-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100px;
+        box-shadow: 1px 4px 6px 1px #ccc;
+      }
+      .container {
+        width: 80%;
+        height: auto;
+        display: grid;
+        grid-template-columns: 3fr 1fr 3fr;
+        margin: 0 auto;
+        box-shadow: 1px 4px 6px 1px #ccc;
+        margin-top: 30px;
+        border-radius: 10px;
+        padding: 20px;
+      }
+      .settings {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-direction: column;
+      }
+      .settings i {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 1px 4px 6px 1px #ccc;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .list-item {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+        flex-direction: row;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="transfer-list-header">
+      <h1>Transfer List</h1>
+    </div>
+    <div class="container">
+      <div class="box" id="first-box"></div>
+      <div class="settings">
+        <i
+          class="fa fa-angle-double-left"
+          aria-hidden="true"
+          id="all-left-btn"
+        ></i>
+        <i class="fa fa-angle-left" aria-hidden="true" id="left-btn"></i>
+        <i class="fa fa-angle-right" aria-hidden="true" id="right-btn"></i>
+        <i
+          class="fa fa-angle-double-right"
+          aria-hidden="true"
+          id="all-right-btn"
+        ></i>
+      </div>
+      <div class="box" id="second-box"></div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
