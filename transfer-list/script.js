@@ -1,12 +1,14 @@
 let firstBoxList = [
-  { title: "Read", checked: true, id: 123123 },
-  { title: "Write", checked: false, id: 123124 },
-  { title: "Code", checked: true, id: 123125 },
+  { title: "JS", checked: true, id: 123123 },
+  { title: "HTML", checked: false, id: 123124 },
+  { title: "CSS", checked: true, id: 123125 },
+  { title: "TS", checked: true, id: 122125 },
 ];
 let secondBoxList = [
   { title: "React", checked: false, id: 1231123 },
-  { title: "JavaScript", checked: false, id: 1232124 },
-  { title: "Node", checked: false, id: 1232125 },
+  { title: "Angular", checked: false, id: 1232124 },
+  { title: "Vue", checked: false, id: 1232125 },
+  { title: "Svelte", checked: false, id: 193125 },
 ];
 
 const itemCount = { item1: 2, item2: 0 };
