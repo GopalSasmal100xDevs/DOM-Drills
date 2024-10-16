@@ -56,6 +56,10 @@ function render() {
 
     const todoTitle = document.createElement("h4");
     todoTitle.innerText = title;
+
+    const allButtons = document.createElement("div");
+    allButtons.setAttribute("class", "todo-buttons");
+
     const editTodo = document.createElement("button");
     editTodo.setAttribute("title", "Edit");
     editTodo.setAttribute("id", "edit-btn");
@@ -67,31 +71,39 @@ function render() {
     deleteTodo.innerHTML = `<i class="fa fa-trash" aria-hidden="true"></i>`;
 
     todoItem.appendChild(todoTitle);
-    todoItem.appendChild(editTodo);
-    todoItem.appendChild(deleteTodo);
+    allButtons.appendChild(deleteTodo);
+    allButtons.appendChild(editTodo);
+    todoItem.appendChild(allButtons);
 
-    // Edit todo
-    editTodo.addEventListener("click", (e) => {
-      todoTitle.contentEditable = true;
-      todoTitle.focus();
-      const saveTodo = document.createElement("button");
-      saveTodo.setAttribute("id", "save-btn");
-      todoTitle.setAttribute("class", "save-input");
-      saveTodo.innerHTML = `<i class="fa fa-bookmark" aria-hidden="true"></i>`;
-      todoItem.appendChild(saveTodo);
+    // Event delegation
+    todoItem.addEventListener("click", (e) => {
+      if (
+        e.target.id == "delete-btn" ||
+        e.target.parentElement?.id == "delete-btn"
+      ) {
+        // Delete todo
+        deleteTodoFromList(id);
+      } else if (
+        e.target.id == "edit-btn" ||
+        e.target.parentElement?.id == "edit-btn"
+      ) {
+        // edit todo
+        todoTitle.contentEditable = true;
+        todoTitle.focus();
+        const saveTodo = document.createElement("button");
+        saveTodo.setAttribute("id", "save-btn");
+        todoTitle.setAttribute("class", "save-input");
+        saveTodo.innerHTML = `<i class="fa fa-bookmark" aria-hidden="true"></i>`;
+        allButtons.appendChild(saveTodo);
 
-      saveTodo.addEventListener("click", (e) => {
-        todoTitle.contentEditable = false;
-        todoItem.removeChild(saveTodo);
-        todoTitle.removeAttribute("class", "save-input");
-        const updatedTodoTitle = todoTitle.innerText;
-        updateTodoFromList(id, updatedTodoTitle);
-      });
-    });
-
-    // Delete todo
-    deleteTodo.addEventListener("click", () => {
-      deleteTodoFromList(id);
+        saveTodo.addEventListener("click", (e) => {
+          todoTitle.contentEditable = false;
+          allButtons.removeChild(saveTodo);
+          todoTitle.removeAttribute("class", "save-input");
+          const updatedTodoTitle = todoTitle.innerText;
+          updateTodoFromList(id, updatedTodoTitle);
+        });
+      }
     });
 
     todoContainer.appendChild(todoItem);
