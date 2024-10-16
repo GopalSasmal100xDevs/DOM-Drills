@@ -12,6 +12,11 @@ let secondBoxList = [
 ];
 
 const itemCount = { item1: 2, item2: 0 };
+// Settings btn selectors
+const allItemsRightBtn = document.querySelector("#all-right-btn");
+const allItemsLeftBtn = document.querySelector("#all-left-btn");
+const moveLeftBtn = document.querySelector("#left-btn");
+const moveRightBtn = document.querySelector("#right-btn");
 
 function moveAllItemsToRight() {
   secondBoxList = [...secondBoxList, ...firstBoxList];
@@ -67,6 +72,7 @@ function renderList(list, parent) {
 
     const checkBox = document.createElement("input");
     checkBox.setAttribute("type", "checkbox");
+    checkBox.setAttribute("id", "list-checkbox");
 
     if (checked) {
       checkBox.setAttribute("checked", "checked");
@@ -86,17 +92,30 @@ function renderList(list, parent) {
   disableButton();
 }
 
-const allItemsRightBtn = document.querySelector("#all-right-btn");
-allItemsRightBtn.addEventListener("click", moveAllItemsToRight);
-
-const allItemsLeftBtn = document.querySelector("#all-left-btn");
-allItemsLeftBtn.addEventListener("click", moveAllItemsToLeft);
-
-const moveLeftBtn = document.querySelector("#left-btn");
-moveLeftBtn.addEventListener("click", moveItemsLeft);
-
-const moveRightBtn = document.querySelector("#right-btn");
-moveRightBtn.addEventListener("click", moveItemsRight);
+const settingsBtn = document.querySelector(".settings");
+settingsBtn.addEventListener("click", (e) => {
+  if (
+    e.target.id == "all-right-btn" ||
+    e.target.parentNode?.id == "all-right-btn"
+  ) {
+    moveAllItemsToRight();
+  } else if (
+    e.target.id == "all-left-btn" ||
+    e.target.parentNode?.id == "all-left-btn"
+  ) {
+    moveAllItemsToLeft();
+  } else if (
+    e.target.id == "left-btn" ||
+    e.target.parentNode?.id == "left-btn"
+  ) {
+    moveItemsLeft();
+  } else if (
+    e.target.id == "right-btn" ||
+    e.target.parentNode?.id == "right-btn"
+  ) {
+    moveItemsRight();
+  }
+});
 
 function render() {
   const firstBoxContainer = document.querySelector("#first-box");
