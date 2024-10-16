@@ -10,6 +10,7 @@ const todo = document.querySelector("#todo");
 todo.addEventListener("submit", (e) => {
   e.preventDefault();
   const todoTitle = todo.querySelector("input").value;
+
   if (todoTitle === "") {
     return;
   }
@@ -19,8 +20,6 @@ todo.addEventListener("submit", (e) => {
   todoList.push({ title: todoTitle, id: Date.now() });
   render();
 });
-
-render();
 
 function deleteTodoFromList(id) {
   todoList = todoList.filter((item) => item.id !== id);
@@ -46,8 +45,10 @@ function render() {
     const noItem = document.createElement("h1");
     noItem.innerText = "Ooops! List is empty";
     todoContainer.appendChild(noItem);
+    localStorage.setItem("todos", JSON.stringify(todoList));
     return;
   }
+
   todoList.forEach(({ title, id }) => {
     const todoItem = document.createElement("div");
     todoItem.setAttribute("class", "todo-item");
@@ -95,4 +96,12 @@ function render() {
 
     todoContainer.appendChild(todoItem);
   });
+
+  localStorage.setItem("todos", JSON.stringify(todoList));
 }
+
+// After load DOM call render function
+(() => {
+  todoList = JSON.parse(localStorage.getItem("todos")) || todoList;
+  render();
+})();
