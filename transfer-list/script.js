@@ -1,15 +1,5 @@
-let firstBoxList = [
-  { title: "JS", checked: true, id: 123123 },
-  { title: "HTML", checked: false, id: 123124 },
-  { title: "CSS", checked: true, id: 123125 },
-  { title: "TS", checked: true, id: 122125 },
-];
-let secondBoxList = [
-  { title: "React", checked: false, id: 1231123 },
-  { title: "Angular", checked: false, id: 1232124 },
-  { title: "Vue", checked: false, id: 1232125 },
-  { title: "Svelte", checked: false, id: 193125 },
-];
+let firstBoxList = [];
+let secondBoxList = [];
 
 const itemCount = { item1: 0, item2: 0 };
 // Settings btn selectors
@@ -69,6 +59,7 @@ function uncheckItem(itemId, list) {
       arr[index]["checked"] = !checked;
     }
   });
+  saveList(firstBoxList, secondBoxList);
   render();
 }
 
@@ -132,7 +123,6 @@ function render() {
   checkboxCount(firstBoxList, secondBoxList); // counting active checked items
   renderList(firstBoxList, firstBoxContainer);
   renderList(secondBoxList, secondBoxContainer);
-  // saveList(firstBoxList, secondBoxList);
 }
 
 function checkboxCount(list1, list2) {
@@ -175,7 +165,20 @@ function disableButton() {
 }
 
 (() => {
-  firstBoxList = JSON.parse(localStorage.getItem("list1"));
-  secondBoxList = JSON.parse(localStorage.getItem("list2"));
+  const list1 = JSON.parse(localStorage.getItem("list1"));
+  const list2 = JSON.parse(localStorage.getItem("list2"));
+  firstBoxList = list1 ?? [
+    { title: "JS", checked: true, id: 123123 },
+    { title: "HTML", checked: false, id: 123124 },
+    { title: "CSS", checked: true, id: 123125 },
+    { title: "TS", checked: true, id: 122125 },
+  ];
+
+  secondBoxList = list2 ?? [
+    { title: "React", checked: false, id: 1231123 },
+    { title: "Angular", checked: false, id: 1232124 },
+    { title: "Vue", checked: false, id: 1232125 },
+    { title: "Svelte", checked: false, id: 193125 },
+  ];
   render();
 })();
