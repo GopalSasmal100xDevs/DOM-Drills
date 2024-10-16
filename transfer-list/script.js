@@ -11,17 +11,23 @@ let secondBoxList = [
   { title: "Svelte", checked: false, id: 193125 },
 ];
 
-const itemCount = { item1: 2, item2: 0 };
+const itemCount = { item1: 0, item2: 0 };
 // Settings btn selectors
 const allItemsRightBtn = document.querySelector("#all-right-btn");
 const allItemsLeftBtn = document.querySelector("#all-left-btn");
 const moveLeftBtn = document.querySelector("#left-btn");
 const moveRightBtn = document.querySelector("#right-btn");
 
+function saveList(list1, list2) {
+  localStorage.setItem("list1", JSON.stringify(list1));
+  localStorage.setItem("list2", JSON.stringify(list2));
+}
+
 function moveAllItemsToRight() {
   secondBoxList = [...secondBoxList, ...firstBoxList];
   uncheckAllItems(secondBoxList);
   firstBoxList = [];
+  saveList(firstBoxList, secondBoxList);
   render();
 }
 
@@ -29,6 +35,7 @@ function moveAllItemsToLeft() {
   firstBoxList = [...firstBoxList, ...secondBoxList];
   uncheckAllItems(firstBoxList);
   secondBoxList = [];
+  saveList(firstBoxList, secondBoxList); // save changes
   render();
 }
 
@@ -43,6 +50,7 @@ function moveItemsLeft() {
   firstBoxList = [...firstBoxList, ...selectedItems];
   secondBoxList = secondBoxList.filter(({ checked }) => checked === false);
   uncheckAllItems(firstBoxList);
+  saveList(firstBoxList, secondBoxList);
   render();
 }
 
@@ -51,6 +59,7 @@ function moveItemsRight() {
   secondBoxList = [...secondBoxList, ...selectedItems];
   firstBoxList = firstBoxList.filter(({ checked }) => checked === false);
   uncheckAllItems(secondBoxList);
+  saveList(firstBoxList, secondBoxList);
   render();
 }
 
@@ -123,6 +132,7 @@ function render() {
   checkboxCount(firstBoxList, secondBoxList); // counting active checked items
   renderList(firstBoxList, firstBoxContainer);
   renderList(secondBoxList, secondBoxContainer);
+  // saveList(firstBoxList, secondBoxList);
 }
 
 function checkboxCount(list1, list2) {
@@ -164,4 +174,8 @@ function disableButton() {
   }
 }
 
-render();
+(() => {
+  firstBoxList = JSON.parse(localStorage.getItem("list1"));
+  secondBoxList = JSON.parse(localStorage.getItem("list2"));
+  render();
+})();
